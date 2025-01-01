@@ -1,0 +1,14 @@
+Scenario: Success Login Process
+
+Target: Successful login of registered user to the system
+
+Precondition: Registered user to the system and opening the login screen
+
+Steps:
+1. Verify that the login screen exist
+2. Username is entered
+3. Password is entered
+4. Login button is clicked
+5. Verify that the home page exist
+
+Expected Result: It appears that the home page and products exist
