@@ -22,13 +22,41 @@ public class LoginTestFeature {
     }
 
     @Test
-    public void loginTest(){
+    public void successLoginProcess(){
         loginPage.enterUsername("standard_user");
         loginPage.enterPassword("secret_sauce");
         loginPage.clickLogin();
 
         String verifyHomePageText = loginPage.getHomePageText();
         Assert.assertEquals(verifyHomePageText, "Swag Labs");
+    }
+
+    @Test
+    public void lockedUserLoginProcess(){
+        loginPage.enterUsername("locked_out_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        String verifyLockedOutUserNoticeMessage = loginPage.getLockedOutUserNoticeMessage();
+        Assert.assertEquals(verifyLockedOutUserNoticeMessage, "Epic sadface: Sorry, this user has been locked out.");
+    }
+
+    @Test
+    public void missingUsernameLoginProcess(){
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        String verifyMissingUsernameNoticeMessage = loginPage.getMissingUsernameNoticeMessage();
+        Assert.assertEquals(verifyMissingUsernameNoticeMessage, "Epic sadface: Username is required");
+    }
+
+    @Test
+    public void missingPasswordLoginProcess(){
+        loginPage.enterUsername("standard_user");
+        loginPage.clickLogin();
+
+        String verifyMissingPasswordNoticeMessage = loginPage.getMissingPasswordNoticeMessage();
+        Assert.assertEquals(verifyMissingPasswordNoticeMessage, "Epic sadface: Password is required");
     }
 
     @AfterClass
